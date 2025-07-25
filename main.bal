@@ -1,4 +1,5 @@
 import ballerina/http;
+import ballerina/log;
 
 // HTTP client for imgflip API
 final http:Client imgflipClient = check new ("https://api.imgflip.com");
@@ -17,6 +18,7 @@ service /helloworld on httpDefaultListener {
     resource function get get_meme() returns error|json {
         do {
             json response = check imgflipClient->/get_memes.get();
+            log:printInfo("Just a log");
             return response;
         } on fail error err {
             return error("Failed to fetch memes", err);
